@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var questionText: UILabel!
+    @IBOutlet weak var showCorrect: UILabel!
+    @IBOutlet weak var showIncorrect: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var trueButton: UIButton!
@@ -23,21 +25,17 @@ class ViewController: UIViewController {
         questionText.text = quizBrain.getQuestionText()
         progressBar.progress = 0.1
         updateUI()
-        
-        
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        
-    
         let userAnswer = sender.currentTitle!
         let userGotItRight = quizBrain.checkAnswer(userAnswer)
-        
         if userGotItRight {//if correct
             sender.backgroundColor = UIColor.green
         }else { //if incorrect
             sender.backgroundColor = UIColor.red
         }
+        
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector:#selector( updateUI), userInfo: nil, repeats: false)
         quizBrain.nextQuestion()
@@ -49,8 +47,8 @@ class ViewController: UIViewController {
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
         progressBar.progress = quizBrain.getProgress()
-        
-    }
+        showCorrect.text = "\(quizBrain.correctCounter)"
+        showIncorrect.text = "\(quizBrain.incorrectCounter)"    }
     
 }
     

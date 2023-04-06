@@ -22,14 +22,17 @@ struct QuizBrain{
         Question(q: "Quidditch is the most popular sport among witches and wizards in “Harry Potter", a: "True" ),
         Question(q: "The Beatles is a famous rock band from Manchester, the United Kingdom.", a: "False"),
         Question(q: "Machu Picchu is an abandoned Incan citadel located in Chile." , a: "False"),
-        Question(q: "The World War II began in 1939 when Germany invaded Poland." , a: "True")
+        Question(q: "The World War II began in 1939 when Germany invaded Poland." , a: "True"),
+        Question(q: "You have reached the end of the quiz. Press Any button to continue.", a: "Null")
     ]
     
+
+    //maybe change the entire view once the counter reaches the upper limit. 
     
     var questionNum = 0
     var correctCounter = 0
     var incorrectCounter = 0
-    
+    let endText = "You have reached the end of the quiz. Click anywhere to continue."
     
     mutating func checkAnswer(_ userAnswer: String)->Bool{
         print(userAnswer)
@@ -53,6 +56,10 @@ struct QuizBrain{
         if questionNum+1 < (quiz.count) {
             questionNum+=1
             print("go to next question")}
-        else {print("This is the end")}
+        else {print("This is the end")
+            questionNum = 0
+            correctCounter = 0
+            incorrectCounter = 0
+        }
     }
 }
